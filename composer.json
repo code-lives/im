@@ -1,0 +1,18 @@
+{
+    "name": "lijie0810/pay",
+    "description": "this is pay",
+    "type": "library",
+    "license": "MIT",
+    "version":"1.0",
+    "authors": [
+        {
+            "name": "lijie",
+            "email": "18734351007@163.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+    "autoload":{
+   	"psr-4":{"pay\\demo\\":"src"}
+    }
+}
