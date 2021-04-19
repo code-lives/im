@@ -1,6 +1,6 @@
 {
-    "name": "lijie0810/pay",
-    "description": "this is pay",
+    "name": "code-lives/Im",
+    "description": "this is im",
     "type": "library",
     "license": "MIT",
     "version":"1.0",
@@ -13,6 +13,6 @@
     "minimum-stability": "stable",
     "require": {},
     "autoload":{
-   	"psr-4":{"pay\\demo\\":"src"}
+   	"psr-4":{"Im\\api\\":"src"}
     }
 }
