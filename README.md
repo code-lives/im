@@ -15,7 +15,7 @@ admin_id   Im 管理员账号【选填】用于发送一些消息。比如 A和B
 
 ```php
 
-$Im = new Im\api\Im($im_id,$im_key,,$admin_id);
+$Im = new Im\api\Im($im_id,$im_key);
 
 $Im->genUserSig($uid);
 
@@ -24,7 +24,7 @@ $Im->genUserSig($uid);
 
 ```php
 
-$Im = new Im\api\Im($im_id,$im_key,,$admin_id);
+$Im = new Im\api\Im($im_id,$im_key,$admin_id);
 
 $Im->account_import($uid,$nickname,$images); //用户的uid 姓名 头像
 
@@ -35,7 +35,7 @@ $Im->account_import($uid,$nickname,$images); //用户的uid 姓名 头像
 
 ```php
 
-$Im = new Im\api\Im($im_id,$im_key,,$admin_id);
+$Im = new Im\api\Im($im_id,$im_key,$admin_id);
 
 $Im->check_bind($uid); //用户uid
 
@@ -43,11 +43,11 @@ $Im->check_bind($uid); //用户uid
 
 ```
 
-## 管理员发送自定义消息[new 的必须带 amdin_id]
+## 管理员发送自定义消息[new 的必须带 _admin_id]
 
 ```php
 
-$Im = new Im\api\Im($im_id,$im_key,,$admin_id);
+$Im = new Im\api\Im($im_id,$im_key,$admin_id);
 
 $Im->from_to($from_id,$to_id,$content);  //发送人id 接收人id 内容自定义的数组或字符串
 
@@ -59,7 +59,7 @@ $Im->from_to($from_id,$to_id,$content);  //发送人id 接收人id 内容自定�
 
 ```php
 
-$Im = new Im\api\Im($im_id,$im_key,,$admin_id);
+$Im = new Im\api\Im($im_id,$im_key,$admin_id);
 
 $Im->get_work_list($work_name,$offset,$limit);  //群名称  offset 类似于分页 limit 每页几条
 
@@ -71,7 +71,7 @@ $Im->get_work_list($work_name,$offset,$limit);  //群名称  offset 类似于分
 
 ```php
 
-$Im = new Im\api\Im($im_id,$im_key,,$admin_id);
+$Im = new Im\api\Im($im_id,$im_key,$admin_id);
 
 $Im->add_work($work_name,$uid);  //群名称  用户uid
 
@@ -83,7 +83,7 @@ $Im->add_work($work_name,$uid);  //群名称  用户uid
 
 ```php
 
-$Im = new Im\api\Im($im_id,$im_key,,$admin_id);
+$Im = new Im\api\Im($im_id,$im_key,$admin_id);
 
 $Im->create_work($create_id，$group_name);  //创建人id  群名称
 
