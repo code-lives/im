@@ -1,15 +1,20 @@
 # Im
-腾讯Im 加入聊天池  两个人发送自定义消息 加入群组 创建群主 获取群成员列表
+
+腾讯Im 加入聊天池 系统发送自定义消息 加入群组 创建群组 获取群成员列表 检测用户是否在加入Im
 
 ## 设置参数
 ```php
 im_id      Im 申请的id
+
 im_key     Im 申请的key
-admin_id   Im 管理员账号【选填】用于发送一些消息。比如 A和B在聊天  拿着A账号给B发送一条消息
+
+admin_id   Im 管理员账号【选填】用于发送一些消息。比如 A和B在聊天  拿着A账号给B发送一条消息 或者 创建群组 查询群组等
+
 ```
 ## 生成 UserSig
 
 ```php
+
 $Im = new Im\api\Im($im_id,$im_key,,$admin_id);
 
 $Im->genUserSig($uid);
@@ -26,7 +31,7 @@ $Im->account_import($uid,$nickname,$images); //用户的uid 姓名 头像
 返回类型 true  false
 
 ```
-## 检测用户时候在加入Im
+## 检测用户是否在加入Im
 
 ```php
 
