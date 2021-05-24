@@ -16,6 +16,7 @@ class Im
 		'GROUP_URL' => 'v4/group_open_http_svc/get_group_member_info', //获取群成员信息
 		'ADD_GROUP' => 'v4/group_open_http_svc/add_group_member', //加入群组
 		'CREATE_GROUP' => 'v4/group_open_http_svc/create_group', //创建群组
+		'DELETE_GROUP' => 'v4/group_open_http_svc/delete_group_member', //删除群组成员
 	];
 
 	public function __construct($sdkappid, $key, $admin_id = null)
@@ -149,6 +150,27 @@ class Im
 					'Member_Account' => $uid,
 				)
 			),
+		);
+		$data = $this->curl_get($url, json_encode($data));
+		if ($data['ActionStatus'] == "OK" && $data['ErrorCode'] == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	/**
+	 * 【功能说明】删除群成员
+	 * @param string work_name 群名称
+	 * @param string uid 群成员id
+	 * @return bool ture成功 false失败
+	 */
+	public function delete_work_user(string $work_name, $uid)
+	{
+		$url = $this->set_url('DELETE_GROUP');
+		$data = array(
+			'GroupId' => $work_name,
+			'Silence' => 1,
+			'MemberToDel_Account' => [$uid]
 		);
 		$data = $this->curl_get($url, json_encode($data));
 		if ($data['ActionStatus'] == "OK" && $data['ErrorCode'] == 0) {
