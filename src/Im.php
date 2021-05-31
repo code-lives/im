@@ -17,6 +17,7 @@ class Im
 		'ADD_GROUP' => 'v4/group_open_http_svc/add_group_member', //加入群组
 		'CREATE_GROUP' => 'v4/group_open_http_svc/create_group', //创建群组
 		'DELETE_GROUP' => 'v4/group_open_http_svc/delete_group_member', //删除群组成员
+		'MSG_READ'=>'v4/openim/admin_set_msg_read',//设置用户的某个单聊会话的消息全部已读
 	];
 
 	public function __construct($sdkappid, $key, $admin_id = null)
@@ -171,6 +172,26 @@ class Im
 			'GroupId' => $work_name,
 			'Silence' => 1,
 			'MemberToDel_Account' => [$uid]
+		);
+		$data = $this->curl_get($url, json_encode($data));
+		if ($data['ActionStatus'] == "OK" && $data['ErrorCode'] == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	/**
+	 * 【功能说明】设置用户的某个单聊会话的消息全部已读
+	 * @param $from_id 操作的用户
+	 * @param $to_id 被读用户
+	 * @return bool ture成功 false失败
+	 */
+	public function msg_read($from_id,$to_id)
+	{
+		$url = $this->set_url('MSG_READ');
+		$data = array(
+			'Report_Account' => $from_id,
+			'Peer_Account' => $to_id,
 		);
 		$data = $this->curl_get($url, json_encode($data));
 		if ($data['ActionStatus'] == "OK" && $data['ErrorCode'] == 0) {
