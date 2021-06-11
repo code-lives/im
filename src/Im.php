@@ -18,6 +18,7 @@ class Im
 		'CREATE_GROUP' => 'v4/group_open_http_svc/create_group', //创建群组
 		'DELETE_GROUP' => 'v4/group_open_http_svc/delete_group_member', //删除群组成员
 		'MSG_READ'=>'v4/openim/admin_set_msg_read',//设置用户的某个单聊会话的消息全部已读
+		'GET_HISTORY'=>'v4/open_msg_svc/get_history',//拉取聊天获取
 	];
 
 	public function __construct($sdkappid, $key, $admin_id = null)
@@ -200,6 +201,28 @@ class Im
 			return false;
 		}
 	}
+	/**
+	 * 【功能说明】拉取聊天记录压缩包
+	 * @return URL 压缩包下载地址
+	 * @return ExpireTime 过期时间
+	 * @return FileSize 文件大小 GZip 压缩前的文件大小（单位 Byte）
+	 * @return FileMD5 GZip压缩前的文件 MD5
+	 * @return GzipSize GZip压缩后的文件大小（单位 Byte）
+	 * @return GzipMD5 GZip 压缩后的文件大小（单位 Byte）
+	 *
+	 */
+	public function get_history()
+	{
+		$url = $this->set_url('GET_HISTORY');
+		
+		$data = $this->curl_get($url);
+		if ($data['ActionStatus'] == "OK" && $data['ErrorCode'] == 0) {
+			return $data['File'];
+		} else {
+			return false;
+		}
+	}
+	
 	/**
 	 * 【功能说明】创建群组
 	 * @param string work_name 群名称
