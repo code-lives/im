@@ -101,3 +101,15 @@ $Im->create_work($create_id，$group_name);  //创建人id  群名称
 返回类型 群id  false
 
 ```
+
+## 拉取聊天记录
+
+```php
+
+$Im = new Im\api\Im($im_id,$im_key,$admin_id);
+
+$Im->get_history($parm);  //$parm['ChatType']消息类型 $parm['MsgTime'] 时间戳 2021010221=2021年10月1日21时-21时59分记录
+
+返回类型 群id  false
+
+```
