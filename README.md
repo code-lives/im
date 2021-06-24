@@ -102,6 +102,18 @@ $Im->create_work($create_id，$group_name);  //创建人id  群名称
 
 ```
 
+## 消息已读
+
+```php
+
+$Im = new Im\api\Im($im_id,$im_key,$admin_id);
+
+$Im->msg_read($from_id，$to_id);  //fromy_id 操作用户  to_id 被读用户
+
+返回类型 群id  false
+
+```
+
 ## 拉取聊天记录
 
 ```php
