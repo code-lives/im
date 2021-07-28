@@ -3,7 +3,7 @@
     "description": "腾讯Im 加入聊天池 系统发送自定义消息 加入群组 创建群组 获取群成员列表 检测用户是否在加入Im 更改未读状态 拉取聊天记录 设置个人资料",
     "type": "library",
     "license": "MIT",
-    "version":"2.0",
+    "version":"3.0",
     "authors": [
         {
             "name": "lijie",
