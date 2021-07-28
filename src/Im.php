@@ -17,8 +17,9 @@ class Im
 		'ADD_GROUP' => 'v4/group_open_http_svc/add_group_member', //加入群组
 		'CREATE_GROUP' => 'v4/group_open_http_svc/create_group', //创建群组
 		'DELETE_GROUP' => 'v4/group_open_http_svc/delete_group_member', //删除群组成员
-		'MSG_READ'=>'v4/openim/admin_set_msg_read',//设置用户的某个单聊会话的消息全部已读
-		'GET_HISTORY'=>'v4/open_msg_svc/get_history',//拉取聊天获取
+		'MSG_READ' => 'v4/openim/admin_set_msg_read', //设置用户的某个单聊会话的消息全部已读
+		'GET_HISTORY' => 'v4/open_msg_svc/get_history', //拉取聊天获取
+		'SET_INFO' => 'v4/profile/portrait_set', //设置资料
 	];
 
 	public function __construct($sdkappid, $key, $admin_id = null)
@@ -48,7 +49,7 @@ class Im
 	 * @param string uid  需要绑定的用户uid
 	 * @param string nickname  需要绑定的用户的名称
 	 * @param string images  需要绑定的用户的头像
-	 * @return string 签名字符串
+	 * @return bool true false
 	 */
 	public function account_import(string $uid, string $nickname, string $images)
 	{
@@ -59,6 +60,27 @@ class Im
 			'FaceUrl' => $images
 		);
 		$data = $this->curl_get($url, json_encode($data));
+		if ($data['ActionStatus'] == "OK") {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	/**
+	 * 【功能说明】个人资料设置
+	 *【参数说明】
+	 * @param string uid  需要绑定的用户uid
+	 * @param array data  需要配置的参数 key=val
+	 * @return bool true false
+	 */
+	public function set_info(string $uid, $profileitem)
+	{
+		$url = $this->set_url('SET_INFO');
+		$info = array(
+			'From_Account' => $uid,
+			'ProfileItem' => $profileitem
+		);
+		$data = $this->curl_get($url, json_encode($info));
 		if ($data['ActionStatus'] == "OK") {
 			return true;
 		} else {
@@ -187,7 +209,7 @@ class Im
 	 * @param $to_id 被读用户
 	 * @return bool ture成功 false失败
 	 */
-	public function msg_read($from_id,$to_id)
+	public function msg_read($from_id, $to_id)
 	{
 		$url = $this->set_url('MSG_READ');
 		$data = array(
@@ -203,8 +225,6 @@ class Im
 	}
 	/**
 	 * 【功能说明】拉取聊天记录压缩包
-	 * $parm ChatType 消息类型，C2C 表示单发消息 Group 表示群组消息
-	 * $parm MsgTime 需要下载的消息记录的时间段，2015120121表示获取2015年12月1日21:00 - 21:59的消息的下载地址。该字段需精确到小时。每次请求只能获取某天某小时的所有单发或群组消息记录
 	 * @return URL 压缩包下载地址
 	 * @return ExpireTime 过期时间
 	 * @return FileSize 文件大小 GZip 压缩前的文件大小（单位 Byte）
@@ -227,7 +247,7 @@ class Im
 			return false;
 		}
 	}
-	
+
 	/**
 	 * 【功能说明】创建群组
 	 * @param string work_name 群名称
