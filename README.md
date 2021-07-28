@@ -31,6 +31,17 @@ $Im->account_import($uid,$nickname,$images); //用户的uid 姓名 头像
 返回类型 true  false
 
 ```
+## 设置个人资料
+
+```php
+
+$Im = new Im\api\Im($im_id,$im_key,$admin_id);
+
+$Im->set_info($uid,$data); //用户的uid 用户字段配置
+
+返回类型 true  false
+
+```
 ## 检测用户是否在加入Im
 
 ```php
