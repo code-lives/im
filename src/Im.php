@@ -60,7 +60,7 @@ class Im
 			'FaceUrl' => $images
 		);
 		$data = $this->curl_get($url, json_encode($data));
-		if ($data['ActionStatus'] == "OK") {
+		if (!empty($data) && $data['ActionStatus'] == "OK") {
 			return true;
 		} else {
 			return false;
@@ -81,7 +81,7 @@ class Im
 			'ProfileItem' => $profileitem
 		);
 		$data = $this->curl_get($url, json_encode($info));
-		if ($data['ActionStatus'] == "OK") {
+		if (!empty($data) && $data['ActionStatus'] == "OK") {
 			return true;
 		} else {
 			return false;
@@ -96,7 +96,7 @@ class Im
 		$url = $this->set_url('ACCOUNT_CHECK_URL');
 		$data['CheckItem'][] = array('UserID' => $uid);
 		$data = $this->curl_get($url, json_encode($data));
-		if ($data['ActionStatus'] == 'OK' && $data['ResultItem'][0]['AccountStatus'] == "Imported") {
+		if (!empty($data) && $data['ActionStatus'] == 'OK' && $data['ResultItem'][0]['AccountStatus'] == "Imported") {
 			return true;
 		} else {
 			return false;
@@ -127,7 +127,7 @@ class Im
 			),
 		);
 		$data = $this->curl_get($url, json_encode($datas));
-		if ($data['ActionStatus'] == "OK") {
+		if (!empty($data) && $data['ActionStatus'] == "OK") {
 			return true;
 		} else {
 			return false;
@@ -150,7 +150,7 @@ class Im
 		);
 		$data = $this->curl_get($url, json_encode($data));
 		// dd($data);
-		if ($data['ActionStatus'] == "OK") {
+		if (!empty($data) && $data['ActionStatus'] == "OK") {
 			return $data;
 		} else {
 			return false;
@@ -176,7 +176,7 @@ class Im
 			),
 		);
 		$data = $this->curl_get($url, json_encode($data));
-		if ($data['ActionStatus'] == "OK" && $data['ErrorCode'] == 0) {
+		if (!empty($data) && $data['ActionStatus'] == "OK" && $data['ErrorCode'] == 0) {
 			return true;
 		} else {
 			return false;
@@ -197,7 +197,7 @@ class Im
 			'MemberToDel_Account' => [$uid]
 		);
 		$data = $this->curl_get($url, json_encode($data));
-		if ($data['ActionStatus'] == "OK" && $data['ErrorCode'] == 0) {
+		if (!empty($data) && $data['ActionStatus'] == "OK" && $data['ErrorCode'] == 0) {
 			return true;
 		} else {
 			return false;
@@ -217,7 +217,7 @@ class Im
 			'Peer_Account' => $to_id,
 		);
 		$data = $this->curl_get($url, json_encode($data));
-		if ($data['ActionStatus'] == "OK" && $data['ErrorCode'] == 0) {
+		if (!empty($data) && $data['ActionStatus'] == "OK" && $data['ErrorCode'] == 0) {
 			return true;
 		} else {
 			return false;
@@ -241,7 +241,7 @@ class Im
 			'MsgTime' => $parm['MsgTime'],
 		);
 		$data = $this->curl_get($url, json_encode($data));
-		if ($data['ActionStatus'] == "OK" && $data['ErrorCode'] == 0) {
+		if (!empty($data) && $data['ActionStatus'] == "OK" && $data['ErrorCode'] == 0) {
 			return $data['File'];
 		} else {
 			return false;
@@ -267,7 +267,7 @@ class Im
 
 		$data = $this->curl_get($url, json_encode($data));
 
-		if ($data['ActionStatus'] == "OK" && $data['ErrorCode'] == 0) {
+		if (!empty($data) && $data['ActionStatus'] == "OK" && $data['ErrorCode'] == 0) {
 			return $data['GroupId'];
 		} else {
 			return false;
